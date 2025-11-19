@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="shortcut icon" href="./assets/favicon.ico" type="image/x-icon">
+    <title>Series Viewer</title>
+    <link rel="preconnect" href="https://cdn.jsdelivr.net" />
+    <link
+      id="hljsLightTheme"
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/highlight.js@11.9.0/styles/github.min.css"
+    />
+    <link
+      id="hljsDarkTheme"
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/highlight.js@11.9.0/styles/github-dark-dimmed.min.css"
+      disabled
+    />
+    <link
+      href="https://cdn.jsdelivr.net/npm/remixicon@4.7.0/fonts/remixicon.css"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="style.css" />
+  </head>
+
+  <body>
+    <header>
+      <h1 id="seriesTitle">Bootstrap Series ✦</h1>
+      <div class="header-actions">
+        <div class="series-menu">
+          <button
+            class="series-toggle"
+            id="seriesToggle"
+            type="button"
+            aria-haspopup="true"
+            aria-expanded="false"
+          >
+            Series ▾
+          </button>
+          <div class="series-options" id="seriesOptions" role="menu" hidden>
+            <!-- Series loaded dynamically from database -->
+          </div>
+        </div>
+        <button
+          class="home-btn"
+          id="homeBtn"
+          type="button"
+          data-tooltip="Back to Home"
+        >
+          <i class="ri-home-4-line"></i>
+        </button>
+        <div class="download-menu">
+          <button
+            class="download-toggle"
+            id="downloadToggle"
+            type="button"
+            aria-haspopup="true"
+            aria-expanded="false"
+            data-tooltip="Download"
+          >
+            <i class="ri-download-2-line"></i>
+          </button>
+          <div class="download-options" id="downloadOptions" role="menu" hidden>
+            <button type="button" data-format="png" role="menuitem">
+              Download PNG
+            </button>
+            <button type="button" data-format="pdf" role="menuitem">
+              Download PDF
+            </button>
+          </div>
+        </div>
+        <button class="theme-toggle" id="themeToggle" type="button" data-tooltip="Toggle Theme">
+          Toggle Theme
+        </button>
+      </div>
+    </header>
+    <main>
+      <nav>
+        <div class="nav-toolbar">
+          <input
+            type="search"
+            id="fileSearch"
+            placeholder="Search notes..."
+            aria-label="Search notes"
+          />
+        </div>
+        <ul id="fileList"></ul>
+      </nav>
+      <div aria-hidden="true" class="divider" id="divider"></div>
+      <article id="content" aria-live="polite"></article>
+      <footer id="pager" aria-label="Section navigation">
+        <button id="prevFile" type="button">◀ Previous</button>
+        <button id="nextFile" type="button">Next ▶</button>
+      </footer>
+    </main>
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/highlight.js@11.9.0/lib/common.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/html2canvas@1.4.1/dist/html2canvas.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/jspdf@2.5.1/dist/jspdf.umd.min.js"></script>
+    <script src="script.js"></script>
+  </body>
+</html>

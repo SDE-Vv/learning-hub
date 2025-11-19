@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="../assets/favicon.ico" type="image/x-icon">
+    <title>Admin Dashboard - Learning Hub</title>
+    <link href="https://cdn.jsdelivr.net/npm/remixicon@4.7.0/fonts/remixicon.css" rel="stylesheet">
+    <link rel="stylesheet" href="admin.css">
+</head>
+<body>
+    <!-- Dashboard -->
+    <div id="dashboard" class="dashboard">
+        <div class="header">
+            <h1>Learning Hub Admin</h1>
+            <div class="user-info">
+                <span id="adminUsername">Admin</span>
+                <button id="themeToggleBtn" class="theme-toggle-btn" title="Toggle Theme">
+                    <i class="ri-moon-line"></i>
+                </button>
+                <button id="logoutBtn" class="logout-btn">Logout</button>
+            </div>
+        </div>
+
+        <div class="main-content">
+            <aside class="sidebar">
+                <nav>
+                    <a href="#" class="nav-link active" data-section="overview">
+                        <i class="ri-dashboard-line"></i>
+                        Overview
+                    </a>
+                    <a href="#" class="nav-link" data-section="series">
+                        <i class="ri-folder-line"></i>
+                        Manage Series
+                    </a>
+                    <a href="#" class="nav-link" data-section="files">
+                        <i class="ri-file-text-line"></i>
+                        Manage Files
+                    </a>
+                </nav>
+            </aside>
+
+            <div class="content">
+                <!-- Overview Section -->
+                <div id="overview" class="content-section active">
+                    <h2>Dashboard Overview</h2>
+                    <div class="stats-grid">
+                        <div class="stat-card">
+                            <h3 id="totalSeries">0</h3>
+                            <p>Total Series</p>
+                        </div>
+                        <div class="stat-card">
+                            <h3 id="totalFiles">0</h3>
+                            <p>Total Files</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Series Management Section -->
+                <div id="series" class="content-section">
+                    <div class="card">
+                        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.5rem;">
+                            <h2>Manage Series</h2>
+                            <button class="btn-small btn-success" onclick="showAddSeriesModal()">
+                                <i class="ri-add-line"></i> Add Series
+                            </button>
+                        </div>
+                        <table id="seriesTable">
+                            <thead>
+                                <tr>
+                                    <th>Code</th>
+                                    <th>Name</th>
+                                    <th>Icon</th>
+                                    <th>Order</th>
+                                    <th>Status</th>
+                                    <th>Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody></tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <!-- Files Management Section -->
+                <div id="files" class="content-section">
+                    <div class="card">
+                        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.5rem;">
+                            <h2>Manage Files</h2>
+                            <div>
+                                <select id="fileSeriesFilter" class="filter-select">
+                                    <option value="">All Series</option>
+                                </select>
+                                <button class="btn-small btn-success" onclick="showAddFileModal()">
+                                    <i class="ri-add-line"></i> Add File
+                                </button>
+                            </div>
+                        </div>
+                        <table id="filesTable">
+                            <thead>
+                                <tr>
+                                    <th>Series</th>
+                                    <th>Number</th>
+                                    <th>Title</th>
+                                    <th>Status</th>
+                                    <th>Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody></tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Series Modal -->
+    <div id="seriesModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 id="seriesModalTitle">Add Series</h3>
+                <button class="close-modal" onclick="closeSeriesModal()">&times;</button>
+            </div>
+            <form id="seriesForm">
+                <input type="hidden" id="seriesId">
+                <div class="form-group">
+                    <label>Code (e.g., BS, JS)</label>
+                    <input type="text" id="seriesCode" required maxlength="10">
+                </div>
+                <div class="form-group">
+                    <label>Name</label>
+                    <input type="text" id="seriesName" required>
+                </div>
+                <div class="form-group">
+                    <label>Icon (Remix Icon class)</label>
+                    <input type="text" id="seriesIcon" placeholder="ri-code-line">
+                </div>
+                <div class="form-group">
+                    <label>Display Order</label>
+                    <input type="number" id="seriesOrder" value="0">
+                </div>
+                <button type="submit" class="btn btn-primary">Save Series</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- File Modal -->
+    <div id="fileModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 id="fileModalTitle">Add File</h3>
+                <div>
+                    <button class="fullscreen-toggle" onclick="toggleFullscreen()" title="Toggle Fullscreen">
+                        <i class="ri-fullscreen-line" id="fullscreenIcon"></i>
+                    </button>
+                    <button class="close-modal" onclick="closeFileModal()">&times;</button>
+                </div>
+            </div>
+            <form id="fileForm">
+                <input type="hidden" id="fileId">
+                <div class="form-group">
+                    <label>Series</label>
+                    <select id="fileSeriesCode" required></select>
+                </div>
+                <div class="form-group">
+                    <label>File Number</label>
+                    <input type="number" id="fileNumber" required min="0">
+                </div>
+                <div class="form-group">
+                    <label>Title</label>
+                    <input type="text" id="fileTitle" required>
+                </div>
+                <div class="form-group">
+                    <label>Content (Markdown)</label>
+                    <textarea id="fileContent" placeholder="# Your Title
+
+## Section
+
+Write your markdown content here..."></textarea>
+                </div>
+                <button type="submit" class="btn btn-primary">Save File</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Custom Notification Popup -->
+    <div id="notificationPopup" class="notification-popup">
+        <div class="notification-content">
+            <i class="notification-icon"></i>
+            <span class="notification-message"></span>
+        </div>
+    </div>
+
+    <!-- Custom Confirmation Dialog -->
+    <div id="confirmationDialog" class="confirmation-dialog">
+        <div class="confirmation-content">
+            <div class="confirmation-header">
+                <i class="ri-alert-line"></i>
+                <h3>Confirm Action</h3>
+            </div>
+            <p class="confirmation-message"></p>
+            <div class="confirmation-actions">
+                <button class="btn btn-cancel" id="confirmCancel">Cancel</button>
+                <button class="btn btn-danger" id="confirmOk">Confirm</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Editor Panel (replaces content area) -->
+    <div id="editorPanel" class="editor-panel">
+        <div class="editor-header">
+            <div class="editor-title">
+                <i class="ri-edit-line"></i>
+                <h3 id="editorPanelTitle">Edit File</h3>
+            </div>
+            <button class="btn-close-editor" onclick="closeEditorPanel()">
+                <i class="ri-close-line"></i> Close Editor
+            </button>
+        </div>
+        <div class="editor-body">
+            <form id="editorForm">
+                <input type="hidden" id="editorFileId">
+                <div class="editor-meta">
+                    <div class="form-group-inline">
+                        <label>Series</label>
+                        <select id="editorSeriesCode" required></select>
+                    </div>
+                    <div class="form-group-inline">
+                        <label>File Number</label>
+                        <input type="number" id="editorFileNumber" required min="0">
+                    </div>
+                    <div class="form-group-inline">
+                        <label>Title</label>
+                        <input type="text" id="editorFileTitle" required>
+                    </div>
+                </div>
+                <div class="form-group editor-content-group">
+                    <label>Content (Markdown)</label>
+                    <textarea id="editorFileContent" placeholder="# Your Title
+
+## Section
+
+Write your markdown content here..."></textarea>
+                </div>
+                <div class="editor-actions">
+                    <button type="button" class="btn btn-cancel" onclick="closeEditorPanel()">Cancel</button>
+                    <button type="submit" class="btn btn-primary">Save Changes</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+    <script src="admin.js"></script>
+</body>
+</html>

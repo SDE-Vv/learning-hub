@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="shortcut icon" href="./assets/favicon.ico" type="image/x-icon">
+  <title>Developer Learning Hub</title>
+  <link rel="preconnect" href="https://cdn.jsdelivr.net" />
+  <link href="https://cdn.jsdelivr.net/npm/remixicon@4.7.0/fonts/remixicon.css" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+
+<body>
+  <div class="hero-controls">
+    <button id="themeToggleBtn" class="home-theme-toggle" title="Toggle theme">
+      <i class="ri-moon-line"></i>
+    </button>
+    <button id="versionBtn" class="hero-version">v1.0.0</button>
+  </div>
+  <div class="hero-overlay">
+    <div class="hero-content">
+      <h1 class="hero-title">Developer Learning Hub</h1>
+      <p class="hero-subtitle">Master Modern Web Development</p>
+      <p class="hero-description">
+        Your comprehensive resource for Bootstrap, JavaScript, CSS, and HTML
+      </p>
+      <div class="hero-actions">
+        <button id="getStartedBtn" class="hero-btn hero-btn-primary">
+          Get Started
+        </button>
+      </div>
+      <!-- Search input for series -->
+      <form id="seriesSearchForm" class="hero-search" role="search" aria-label="Search series">
+        <input id="seriesSearch" type="search" placeholder="Search series (name or code)..."
+          aria-label="Search series" />
+        <button id="seriesSearchBtn" type="submit">Search</button>
+        <div id="searchSuggestions" class="search-suggestions" hidden></div>
+      </form>
+      <div class="hero-series">
+        <p class="hero-series-label">Or choose a series:</p>
+        <div class="hero-series-grid" id="heroSeriesGrid">
+          <!-- Series cards will be loaded dynamically -->
+          <p style="color: rgba(255,255,255,0.7); grid-column: 1/-1; text-align: center;">Loading series...</p>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- About modal for version info -->
+  <div id="aboutModal" class="modal" aria-hidden="true">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h3>About v1.0.0</h3>
+        <button class="close-modal" id="closeAboutModal">&times;</button>
+      </div>
+      <div class="modal-body">
+        <p>Version 1.0.0 — initial public release of Developer Learning Hub.</p>
+        <ul>
+          <li>Feature: Series and files management</li>
+          <li>Feature: Quick Search</li>
+          <li>Feature: Admin dashboard with editor panel</li>
+          <li>Feature: Mobile responsive design</li>
+          <li>Feature: Light Mode / Dark Mode</li>
+          <li>Feature: Downlode File in PNG/PDF Formate</li>
+          <li>Improvements: Better error handling and UX</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+  <script src="script.js"></script>
+</body>
+
+</html>
