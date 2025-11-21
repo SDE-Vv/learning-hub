@@ -20,10 +20,12 @@ class Database {
     // public $conn;
 
     private $host = "db";
-    private $port = "3306";
-    private $db_name = "learning_hub";
-    private $username = "root";
-    private $password = "root";
+private $port = "3306";
+private $db_name = "learning_hub";
+private $username = "root";
+private $password = "root";
+
+
 
 
     // Get database connection
