@@ -15,3 +15,10 @@ RUN chown -R www-data:www-data /var/www/html
 
 # Expose port 80
 EXPOSE 80
+
+# Add environment variables so PHP can read them
+ENV DB_HOST=db
+ENV DB_PORT=3306
+ENV DB_NAME=learning_hub
+ENV DB_USER=root
+ENV DB_PASS=root
