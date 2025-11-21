@@ -12,12 +12,19 @@ if ($_SERVER['REQUEST_METHOD'] === 'OPTIONS') {
 
 class Database {
     // Database credentials - Change these for production
-    private $host = "gateway01.ap-southeast-1.prod.aws.tidbcloud.com";
-    private $port = "4000";
+    // private $host = "gateway01.ap-southeast-1.prod.aws.tidbcloud.com";
+    // private $port = "4000";
+    // private $db_name = "learning_hub";
+    // private $username = "4Uz6v3SMYcmcoMk.root";
+    // private $password = "53RXwUdNakEbByo4";
+    // public $conn;
+
+    private $host = "db";
+    private $port = "3306";
     private $db_name = "learning_hub";
-    private $username = "4Uz6v3SMYcmcoMk.root";
-    private $password = "53RXwUdNakEbByo4";
-    public $conn;
+    private $username = "root";
+    private $password = "root";
+
 
     // Get database connection
     public function getConnection() {
